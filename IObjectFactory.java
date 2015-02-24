@@ -5,10 +5,10 @@ public interface IObjectFactory<E> {
 	/**
 	 * Allocates an instance of E.
 	 */
-    E Alloc();
+    E alloc();
     
     /**
-     * Free an instance of E.
+     * Frees an instance of E.
      */
-    void Free(E e);
+    void free(E e);
 }

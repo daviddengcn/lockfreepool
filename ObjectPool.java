@@ -30,7 +30,7 @@ public class ObjectPool<E> implements IObjectFactory<E> {
     }
     
     @Override
-    public E Alloc() {
+    public E alloc() {
         while (true) {
             // Try reserve a cached object in objects
             int n;
@@ -38,7 +38,7 @@ public class ObjectPool<E> implements IObjectFactory<E> {
                 n = top.get();
                 if (n == 0) {
                     // No cached oobjects, allocate a new one
-                    return factory.Alloc();
+                    return factory.alloc();
                 }
             } while (!top.compareAndSet(n, n - 1));
             // Try fetch the cached object
@@ -52,7 +52,7 @@ public class ObjectPool<E> implements IObjectFactory<E> {
     }
     
     @Override
-    public void Free(E e) {
+    public void free(E e) {
         while (true) {
             // Try reserve a place in this.objects for e.
             int n;
@@ -60,7 +60,7 @@ public class ObjectPool<E> implements IObjectFactory<E> {
                 n = top.get();
                 if (n == objects.length()) {
                     // the pool is full, e is not cached.
-                    factory.Free(e);
+                    factory.free(e);
                 }
             } while (!top.compareAndSet(n, n + 1));
             // Try put e at the reserved place.
