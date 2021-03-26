@@ -54,7 +54,7 @@ public class ObjectPool<E> implements IObjectFactory<E> {
                 return e;
             }
             // It is possible that there is no cached object in the reserved
-            // place. E.g. the place was just reserved and not set yet.
+            // place. E.g. the place was just reserved in free() and not set yet.
             // Let's simply start over.
         }
     }
