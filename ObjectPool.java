@@ -76,7 +76,7 @@ public class ObjectPool<E> implements IObjectFactory<E> {
             if (objects.compareAndSet(n, null, e)) {
                 return;
             }
-            // It is possible that the reserved place was occupied. before
+            // It is possible that the reserved place was occupied before
             // the current thread tried to put e in it. E.g. the place was
             // just reserved in alloc() but not moved out yet
             // Let's simply start over.
