@@ -49,7 +49,7 @@ public class ObjectPool<E> implements IObjectFactory<E> {
                 }
             } while (!top.compareAndSet(n, n - 1));
             // Try to fetch the cached object
-            E e = objects.getAndSet(n, null);
+            E e = objects.getAndSet(n - 1, null);
             if (e != null) {
                 return e;
             }
