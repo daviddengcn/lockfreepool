@@ -69,6 +69,7 @@ public class ObjectPool<E> implements IObjectFactory<E> {
                 if (n == objects.length()) {
                     // The pool is full, e is not cached.
                     factory.free(e);
+                    return;
                 }
             } while (!top.compareAndSet(n, n + 1));
             // Try to put e at the reserved place.
